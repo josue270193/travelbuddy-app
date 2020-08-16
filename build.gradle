@@ -1,0 +1,55 @@
+buildscript {
+    ext.kotlinVersion = '1.3.72'
+    ext.gradleVersion = '4.0.1'
+    ext.navVersion = '2.3.0'
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion"
+    }
+    ext {
+        // Sdk and tools
+        compileSdkVersion = 29
+        minSdkVersion = 21
+        targetSdkVersion = 29
+        buildToolsVersion = '29.0.3'
+
+        // App dependencies
+        appCompatVersion = '1.2.0'
+        constraintLayoutVersion = '2.0.0-rc1'
+        espressoVersion = '3.2.0'
+        jacksonVersion = '2.11.0'
+        junitVersion = '4.13'
+        ktlintVersion = '0.37.2'
+        ktxVersion = '1.3.1'
+        retrofitVersion = '2.9.0'
+        rxandroidVersion = '3.0.0'
+        rxjavaVersion = '3.0.5'
+        materialVersion = '1.3.0-alpha02'
+        roomVersion = '2.2.5'
+        testExtJunit = '1.1.1'
+    }
+}
+
+plugins {
+    id "com.diffplug.spotless" version "5.1.1"
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+spotless {
+    kotlin {
+        target "**/*.kt"
+        ktlint(ktlintVersion)
+    }
+}
