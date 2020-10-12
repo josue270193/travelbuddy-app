@@ -5,22 +5,549 @@
 
     <data />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".activity.MainActivity">
+        android:background="@color/colorActivityDefault">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            tools:visibility="gone">
 
-        <Button
-            android:id="@+id/main_home_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Presioname"
-            />
-    </LinearLayout>
+            <include layout="@layout/skeleton_fragment_main_home" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:context=".activity.MainActivity"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorActivityPrimary"
+                    android:paddingStart="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:contentDescription="@string/descriptionIconLocationCountry"
+                        android:src="@drawable/ic_icon_location" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?attr/textAppearanceHeadline1"
+                        tools:text="Argentina" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="00dp"
+                    android:background="@color/colorActivityDefault"
+                    android:clipChildren="false"
+                    android:gravity="bottom"
+                    android:weightSum="3">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_card_home_second"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:clipChildren="false"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="@id/guideline1"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_home_second"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/colorActivityDefault"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <TextView
+                                        android:id="@+id/card_home_second_title"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:textAppearance="?attr/textAppearanceBody1"
+                                        tools:text="Test" />
+
+                                    <TextView
+                                        android:id="@+id/card_home_second_ranking"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:textAppearance="?attr/textAppearanceOverline"
+                                        android:textColor="@color/colorTitleRanking"
+                                        tools:text="4.88" />
+
+                                </LinearLayout>
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/card_home_second_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/heightCardHomeOther"
+                                    android:scaleType="centerCrop"
+                                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerRounded16"
+                                    app:srcCompat="@color/colorPrimaryDark" />
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="@dimen/buttonCircleRankingSecondarySize"
+                            android:layout_height="@dimen/buttonCircleRankingSecondarySize"
+                            android:translationY="20dp"
+                            app:layout_constraintBottom_toBottomOf="@id/card_home_second"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:id="@+id/fab_card_home_second"
+                                android:layout_width="@dimen/buttonCircleRankingSecondarySize"
+                                android:layout_height="@dimen/buttonCircleRankingSecondarySize"
+                                android:clickable="false"
+                                app:backgroundTint="@color/colorButtonRankingSecond"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:elevation="6dp"
+                                android:text="@string/titleRankingSecond"
+                                android:textAppearance="?attr/textAppearanceHeadline1"
+                                android:textColor="@color/colorTextDark"
+                                app:layout_anchor="@id/fab_card_home_second"
+                                app:layout_anchorGravity="center"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_card_home_first"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:clipChildren="false"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="@id/guideline1"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_home_first"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/colorActivityDefault"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <TextView
+                                        android:id="@+id/card_home_first_title"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:textAppearance="?attr/textAppearanceBody1"
+                                        tools:text="Test" />
+
+                                    <TextView
+                                        android:id="@+id/card_home_first_ranking"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:textAppearance="?attr/textAppearanceOverline"
+                                        android:textColor="@color/colorTitleRanking"
+                                        tools:text="4.99" />
+
+                                </LinearLayout>
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/card_home_first_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/heightCardHomeFirst"
+                                    android:scaleType="centerCrop"
+                                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerRounded16"
+                                    app:srcCompat="@color/colorPrimaryDark" />
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="@dimen/buttonCircleRankingPrimarySize"
+                            android:layout_height="@dimen/buttonCircleRankingPrimarySize"
+                            android:translationY="20dp"
+                            app:layout_constraintBottom_toBottomOf="@id/card_home_first"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:id="@+id/fab_card_home_first"
+                                android:layout_width="@dimen/buttonCircleRankingPrimarySize"
+                                android:layout_height="@dimen/buttonCircleRankingPrimarySize"
+                                android:clickable="false"
+                                app:backgroundTint="@color/colorPrimary"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:elevation="6dp"
+                                android:text="@string/titleRankingFirst"
+                                android:textAppearance="?attr/textAppearanceHeadline1"
+                                android:textColor="@color/colorTextDark"
+                                app:layout_anchor="@id/fab_card_home_first"
+                                app:layout_anchorGravity="center"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_card_home_third"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:clipChildren="false"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="@id/guideline1"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_home_third"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/colorActivityDefault"
+                            app:cardElevation="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:padding="16dp">
+
+                                    <TextView
+                                        android:id="@+id/card_home_third_title"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:textAppearance="?attr/textAppearanceBody1"
+                                        tools:text="Test" />
+
+                                    <TextView
+                                        android:id="@+id/card_home_third_ranking"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:textAppearance="?attr/textAppearanceOverline"
+                                        android:textColor="@color/colorTitleRanking"
+                                        tools:text="4.00" />
+
+                                </LinearLayout>
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/card_home_third_image"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/heightCardHomeOther"
+                                    android:scaleType="centerCrop"
+                                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerRounded16"
+                                    app:srcCompat="@color/colorPrimaryDark" />
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="@dimen/buttonCircleRankingSecondarySize"
+                            android:layout_height="@dimen/buttonCircleRankingSecondarySize"
+                            android:translationY="20dp"
+                            app:layout_constraintBottom_toBottomOf="@id/card_home_third"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                android:id="@+id/fab_card_home_third"
+                                android:layout_width="@dimen/buttonCircleRankingSecondarySize"
+                                android:layout_height="@dimen/buttonCircleRankingSecondarySize"
+                                android:clickable="false"
+                                app:backgroundTint="@color/colorButtonRankingSecond"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:elevation="6dp"
+                                android:text="@string/titleRankingThird"
+                                android:textAppearance="?attr/textAppearanceHeadline1"
+                                android:textColor="@color/colorTextDark"
+                                app:layout_anchor="@id/fab_card_home_third"
+                                app:layout_anchorGravity="center"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.33" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="20dp">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        tools:ignore="UselessParent">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chipGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:chipSpacingHorizontal="@dimen/chipSpacingSearch"
+                            app:singleLine="true">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chip1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:elevation="@dimen/chipDefaultElevation"
+                                android:text="Top Ciudades"
+                                tools:text="Top Ciudades"
+                                style="@style/Widget.App.ChipCountrySearch"
+                                />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chip2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Top Parques Nacionales"
+                                android:elevation="@dimen/chipDefaultElevation"
+                                tools:text="Top Parques Nacionales"
+                                style="@style/Widget.App.ChipCountrySearch"
+                                />
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/chip3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:elevation="@dimen/chipDefaultElevation"
+                                android:text="Top Actividades"
+                                tools:text="Top Actividades"
+                                style="@style/Widget.App.ChipCountrySearch"
+                                />
+
+
+                        </com.google.android.material.chip.ChipGroup>
+                    </HorizontalScrollView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="vertical">
+
+                    <com.github.florent37.expansionpanel.ExpansionHeader
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:expansion_headerIndicator="@id/expansion_indicator_tips_country"
+                        app:expansion_layout="@id/expansion_tips_country"
+                        app:expansion_toggleOnClick="true">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_gradient_tips"
+                            >
+
+                            <TextView
+                                android:id="@+id/expansion_title_tips_country"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="16dp"
+                                android:text="@string/titleCountryTips"
+                                android:textAppearance="?attr/textAppearanceHeadline2"
+                                android:textColor="@color/colorTextDark"
+                                app:layout_constraintEnd_toStartOf="@id/expansion_indicator_tips_country"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toTopOf="@id/expansion_subtitle_tips_country"
+                                />
+
+                            <TextView
+                                android:id="@+id/expansion_subtitle_tips_country"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginBottom="16dp"
+                                android:text="@string/titleCountryTipsSubtitle"
+                                android:textAppearance="?attr/textAppearanceOverline"
+                                android:textColor="@color/colorTitleRanking"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/expansion_indicator_tips_country"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/expansion_title_tips_country" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/expansion_indicator_tips_country"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="32dp"
+                                android:layout_marginBottom="24dp"
+                                android:contentDescription="@string/descriptionImageExpansionIndicatorTipsCountry"
+                                android:background="@color/white"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                    <com.github.florent37.expansionpanel.ExpansionLayout
+                        android:id="@+id/expansion_tips_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/view_tips_country"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            />
+
+                    </com.github.florent37.expansionpanel.ExpansionLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorActivityPrimary"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/countryMoreCitiesTitleMarginStartEnd"
+                        android:layout_marginTop="@dimen/countryMoreCitiesTitleMarginTop"
+                        android:layout_marginEnd="@dimen/countryMoreCitiesTitleMarginStartEnd"
+                        android:text="@string/titleCountryMoreCities"
+                        android:textAppearance="?attr/textAppearanceHeadline2" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/view_remain_cities_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

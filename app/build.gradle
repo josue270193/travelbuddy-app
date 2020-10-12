@@ -58,6 +58,10 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxandroid:$rootProject.rxandroidVersion"
     implementation "io.reactivex.rxjava3:rxjava:$rootProject.rxjavaVersion"
     implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$rootProject.jacksonVersion"
+    implementation "com.facebook.shimmer:shimmer:$rootProject.shimmerVersion"
+    implementation "com.github.florent37:expansionpanel:$rootProject.expansionpanelVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
 
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.testExtJunit"

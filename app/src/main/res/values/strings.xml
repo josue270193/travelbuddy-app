@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">TravelBuddy</string>
+    <string name="appName">TravelBuddy</string>
+    <string name="descriptionSplashIcon">Logo Splash</string>
+    <string name="descriptionSplashBackground">Fondo Splash</string>
+    <string name="labelSplash">Splash Activity</string>
+    <string name="labelMain">Main Activity</string>
+    <string name="titleHome">Inicio</string>
+    <string name="titleFavorite">Favorito</string>
+    <string name="titleDiscovery">Explorar</string>
+    <string name="titleUser">Usuario</string>
+    <string name="labelCityFeatureTransport">Transporte</string>
+    <string name="titleRankingFirst">1</string>
+    <string name="titleRankingSecond">2</string>
+    <string name="titleRankingThird">3</string>
+    <string name="titleCountryTips">Tips</string>
+    <string name="titleCountryMoreCities">Más Ciudades</string>
+    <string name="descriptionIconLocationCountry">Ver localizacion en el Mapa</string>
+    <string name="descriptionImageCountryCity">Imagen de la ciudad</string>
+    <string name="descriptionImageExpansionIndicatorTipsCountry">Mostrar o Ocultar Tips</string>
+    <string name="titleCountryTipsSubtitle">Consejos Generales</string>
 </resources>

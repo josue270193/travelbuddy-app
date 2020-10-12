@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splashTextFontSize">24sp</dimen>
+
+    <dimen name="cityCardMargin">20dp</dimen>
+    <dimen name="cityCardHeight">100dp</dimen>
+    <dimen name="cityFeatureIconWidth">60dp</dimen>
+    <dimen name="cityFeatureIconHeight">60dp</dimen>
+    <dimen name="cityTitleMarginLeft">40dp</dimen>
+    <dimen name="cityTitleMarginRight">40dp</dimen>
+    <dimen name="cityTitleHeight">500dp</dimen>
+    <dimen name="cityTitleRankingMarginTop">-15dp</dimen>
+    <dimen name="cityTitleRankingMarginBottom">20dp</dimen>
+    <dimen name="buttonCircleRankingPrimarySize">56dp</dimen>
+    <dimen name="buttonCircleRankingSecondarySize">46dp</dimen>
+    <dimen name="countryTipsTitleMarginTopBottom">20dp</dimen>
+    <dimen name="countryTipsTitleMarginStartEnd">30dp</dimen>
+    <dimen name="countryTipsTitleIndicatorMarginEnd">10dp</dimen>
+    <dimen name="countryMoreCitiesTitleMarginStartEnd">20dp</dimen>
+    <dimen name="countryMoreCitiesTitleMarginTop">10dp</dimen>
+    <dimen name="heightCardHomeOther">150dp</dimen>
+    <dimen name="heightCardHomeFirst">250dp</dimen>
+    <dimen name="chipDefaultElevation">2dp</dimen>
+    <dimen name="chipSpacingSearch">10dp</dimen>
+</resources>

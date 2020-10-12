@@ -19,8 +19,8 @@
         android:name="com.app.travelbuddy.fragment.main.CityFragment"
         tools:layout="@layout/fragment_main_city">
         <argument
-            android:name="product_id"
-            app:argType="integer" />
+            android:name="cityData"
+            app:argType="com.app.travelbuddy.domain.City" />
     </fragment>
 
 </navigation>

@@ -5,48 +5,132 @@
 
     <data />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorActivityDefault"
         tools:context=".activity.MainActivity">
 
-
-        <io.material.catalog.draggable.DraggableCoordinatorLayout
-            android:id="@+id/parentContainer"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:clickable="true"
-                android:focusable="true"
-                android:checkable="true">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cityTitleHeight"
+                app:layout_constraintBottom_toTopOf="@id/layout_city_features"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textView"
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Card"
-                    android:textColor="?attr/colorOnSecondary"
-                    android:gravity="center" />
+                    android:contentDescription="TODO"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/obelisco" />
 
-            </com.google.android.material.card.MaterialCardView>
-        </io.material.catalog.draggable.DraggableCoordinatorLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/gradient_city" />
 
-        <TextView
-            android:id="@+id/main_city_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+                <LinearLayout
+                    android:id="@+id/layout_city_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/cityTitleMarginLeft"
+                    android:layout_marginEnd="@dimen/cityTitleMarginRight"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Buenos Aires"
+                        android:textStyle="bold" />
+
+                    <RatingBar
+                        android:id="@+id/city_rating_total"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/cityTitleRankingMarginTop"
+                        android:layout_marginBottom="@dimen/cityTitleRankingMarginBottom"
+                        android:rating="0" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Texto de la ciudad" />
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_city_features"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/city_card_transport"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/cityCardHeight"
+                    android:layout_margin="@dimen/cityCardMargin"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/cityCardMargin"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/labelCityFeatureTransport"
+                                android:textColor="@color/colorTextDark"
+                                />
+
+                            <RatingBar
+                                android:id="@+id/city_rating_feature_transport"
+                                style="?android:attr/ratingBarStyleIndicator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:rating="0" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="@dimen/cityFeatureIconWidth"
+                            android:layout_height="@dimen/cityFeatureIconHeight"
+                            android:contentDescription="Caracteristica Transporte"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/ic_feature_transport" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
