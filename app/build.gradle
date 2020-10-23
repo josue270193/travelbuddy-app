@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -40,10 +41,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
 }
 
 dependencies {
-    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
@@ -52,16 +55,47 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navVersion"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$rootProject.navVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-jackson:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava3:$rootProject.retrofitVersion"
-    implementation "io.reactivex.rxjava3:rxandroid:$rootProject.rxandroidVersion"
-    implementation "io.reactivex.rxjava3:rxjava:$rootProject.rxjavaVersion"
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$rootProject.jacksonVersion"
     implementation "com.facebook.shimmer:shimmer:$rootProject.shimmerVersion"
     implementation "com.github.florent37:expansionpanel:$rootProject.expansionpanelVersion"
+
+    // PREFERENCES
+    implementation "androidx.preference:preference-ktx:$rootProject.preferenceVersion"
+
+    // RETROFIT
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-jackson:$rootProject.retrofitVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptorVersion"
+
+    // JACKSON
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$rootProject.jacksonVersion"
+
+    // GLIDE
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+
+    // Room
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.archLifecycleVersion"
+
+    // HILT
+    implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hiltViewmodelVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hiltViewmodelVersion"
+
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.testExtJunit"

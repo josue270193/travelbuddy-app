@@ -7,20 +7,47 @@
 
     <fragment
         android:id="@+id/main_home"
-        android:name="com.app.travelbuddy.fragment.main.HomeFragment"
+        android:name="com.app.travelbuddy.ui.fragment.main.HomeFragment"
         tools:layout="@layout/fragment_main_home">
         <action
             android:id="@+id/navigate_to_main_city"
             app:destination="@id/main_city" />
+        <action
+            android:id="@+id/navigate_to_main_discovery"
+            app:destination="@id/main_discovery" />
+        <action
+            android:id="@+id/navigate_to_main_user"
+            app:destination="@id/main_user" />
     </fragment>
 
     <fragment
         android:id="@+id/main_city"
-        android:name="com.app.travelbuddy.fragment.main.CityFragment"
+        android:name="com.app.travelbuddy.ui.fragment.main.CityFragment"
         tools:layout="@layout/fragment_main_city">
         <argument
             android:name="cityData"
-            app:argType="com.app.travelbuddy.domain.City" />
+            app:argType="com.app.travelbuddy.ui.model.CityModel" />
+        <action
+            android:id="@+id/navigate_to_main_city_service"
+            app:destination="@id/main_city_service" />
     </fragment>
 
+    <fragment
+        android:id="@+id/main_discovery"
+        android:name="com.app.travelbuddy.ui.fragment.main.DiscoveryFragment"
+        tools:layout="@layout/fragment_main_discovery">
+    </fragment>
+
+    <fragment
+        android:id="@+id/main_user"
+        android:name="com.app.travelbuddy.ui.fragment.main.UserFragment"
+        tools:layout="@layout/fragment_main_user">
+    </fragment>
+
+    <fragment
+        android:id="@+id/main_city_service"
+        android:name="com.app.travelbuddy.ui.fragment.main.CityServiceFragment"
+        tools:layout="@layout/fragment_main_city_service">
+
+    </fragment>
 </navigation>

@@ -19,7 +19,7 @@
         tools:ignore="AllowBackup">
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +29,10 @@
         </activity>
 
         <activity
-            android:name=".activity.MainActivity"
-            tools:ignore="Instantiatable" />
+            android:name=".ui.activity.MainActivity"
+            tools:ignore="Instantiatable">
+            <nav-graph android:value="@navigation/nav_main" />
+        </activity>
     </application>
 
 </manifest>

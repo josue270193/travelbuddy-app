@@ -21,6 +21,11 @@
     <color name="tipsGradientStart">#FFEA77</color>
     <color name="tipsGradientEnd">#A7D676</color>
 
+    <color name="rewiewGoodGradientStart">#FFEA77</color>
+    <color name="rewiewGoodGradientEnd">#A7D676</color>
+    <color name="rewiewBadGradientStart">#FFEA77</color>
+    <color name="rewiewBadGradientEnd">#D6607D</color>
+
     <color name="colorCardBackground">#FFFFFF</color>
     <color name="colorCardBackgroundClick">#A7D676</color>
 
@@ -32,4 +37,7 @@
     <color name="colorSkeleton">#DDDDDD</color>
 
     <color name="white">#FFFFFF</color>
+
+    <color name="colorCountryTipCurrency">#FFEA77</color>
+    <color name="colorCardAttraction">#0D000000</color>
 </resources>

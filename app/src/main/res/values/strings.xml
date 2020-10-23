@@ -18,4 +18,28 @@
     <string name="descriptionImageCountryCity">Imagen de la ciudad</string>
     <string name="descriptionImageExpansionIndicatorTipsCountry">Mostrar o Ocultar Tips</string>
     <string name="titleCountryTipsSubtitle">Consejos Generales</string>
+
+    <string name="cityCardTransitionName">city_card_detail_%1$s</string>
+    <string name="cityCardDetailTransitionName">city_card_detail</string>
+
+    <string name="attractionCardTransitionName">attraction_card_detail_%1$s</string>
+    <string name="attractionCardDetailTransitionName">attraction_card_detail</string>
+
+    <string name="serviceCardTransitionName">service_card_detail_%1$s</string>
+    <string name="serviceCardDetailTransitionName">service_card_detail</string>
+
+    <string name="cityServiceCardTransitionName">city_service_card_detail_%1$s</string>
+    <string name="cityServiceCardDetailTransitionName">city_service_card_detail</string>
+
+    <string name="locationNotAvailable">Localizacion no disponible</string>
+    <string name="erroConnection">Intente nuevamente</string>
+    <string name="countryTipEmoji">Emoji</string>
+    <string name="contentDescriptionCityImage">Imagen portada de la ciudad</string>
+    <string name="titleCityAttraction">Atractivos</string>
+    <string name="titleCityService">Servicios</string>
+    <string name="descriptionImageAttractionCity">Atraccion de una Ciudad</string>
+    <string name="descriptionIconServiceCity">Icono del servicio</string>
+    <string name="serviceCardReviewAmount">(%1$d)</string>
+    <string name="descriptionImageReviewServiceCity">Resena del Servicio</string>
+    <string name="no_date">Sin Fecha</string>
 </resources>

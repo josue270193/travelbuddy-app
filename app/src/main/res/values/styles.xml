@@ -10,6 +10,7 @@
         <item name="android:textColor">@color/colorText</item>
         <item name="android:progressTint">@color/colorPrimary</item>
 
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.App.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.App.Headline2</item>
         <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>
@@ -84,6 +85,16 @@
         <item name="android:textAppearance">@style/TextAppearance.App.Subtitle1</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.App.ChipSearch</item>
         <item name="chipMinHeight">44dp</item>
+    </style>
+
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
     <style name="ThemeOverlay.App.ButtonRankingSecond" parent="">

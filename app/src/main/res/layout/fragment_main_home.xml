@@ -8,7 +8,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorActivityDefault">
+        android:background="@color/colorActivityDefault"
+        android:fitsSystemWindows="true">
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_home"
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            tools:context=".activity.MainActivity"
+            tools:context=".ui.activity.MainActivity"
             tools:visibility="visible">
 
             <LinearLayout
@@ -39,20 +40,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorActivityPrimary"
-                    android:paddingStart="10dp"
-                    android:paddingTop="20dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="10dp">
+                    android:padding="10dp">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
+                    <ImageButton
+                        android:id="@+id/icon_map_country"
+                        android:layout_width="@dimen/toolbarIconSize"
+                        android:layout_height="@dimen/toolbarIconSize"
+                        android:layout_gravity="center"
+                        android:background="@drawable/round_button"
                         android:contentDescription="@string/descriptionIconLocationCountry"
-                        android:src="@drawable/ic_icon_location" />
+                        app:srcCompat="@drawable/ic_icon_location" />
 
                     <TextView
+                        android:id="@+id/title_country"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?attr/textAppearanceHeadline1"
@@ -391,8 +391,8 @@
                     <HorizontalScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
                         tools:ignore="UselessParent">
 
@@ -405,33 +405,30 @@
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip1"
+                                style="@style/Widget.App.ChipCountrySearch"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:elevation="@dimen/chipDefaultElevation"
                                 android:text="Top Ciudades"
-                                tools:text="Top Ciudades"
-                                style="@style/Widget.App.ChipCountrySearch"
-                                />
+                                tools:text="Top Ciudades" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip2"
+                                style="@style/Widget.App.ChipCountrySearch"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Top Parques Nacionales"
                                 android:elevation="@dimen/chipDefaultElevation"
-                                tools:text="Top Parques Nacionales"
-                                style="@style/Widget.App.ChipCountrySearch"
-                                />
+                                android:text="Top Parques Nacionales"
+                                tools:text="Top Parques Nacionales" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip3"
+                                style="@style/Widget.App.ChipCountrySearch"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:elevation="@dimen/chipDefaultElevation"
                                 android:text="Top Actividades"
-                                tools:text="Top Actividades"
-                                style="@style/Widget.App.ChipCountrySearch"
-                                />
+                                tools:text="Top Actividades" />
 
 
                         </com.google.android.material.chip.ChipGroup>
@@ -441,14 +438,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
                     android:orientation="vertical">
 
                     <com.github.florent37.expansionpanel.ExpansionHeader
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
                         app:expansion_headerIndicator="@id/expansion_indicator_tips_country"
                         app:expansion_layout="@id/expansion_tips_country"
                         app:expansion_toggleOnClick="true">
@@ -456,8 +453,7 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/shape_gradient_tips"
-                            >
+                            android:background="@drawable/shape_gradient_tips">
 
                             <TextView
                                 android:id="@+id/expansion_title_tips_country"
@@ -468,11 +464,10 @@
                                 android:text="@string/titleCountryTips"
                                 android:textAppearance="?attr/textAppearanceHeadline2"
                                 android:textColor="@color/colorTextDark"
+                                app:layout_constraintBottom_toTopOf="@id/expansion_subtitle_tips_country"
                                 app:layout_constraintEnd_toStartOf="@id/expansion_indicator_tips_country"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toTopOf="@id/expansion_subtitle_tips_country"
-                                />
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/expansion_subtitle_tips_country"
@@ -495,8 +490,8 @@
                                 android:layout_marginTop="24dp"
                                 android:layout_marginEnd="32dp"
                                 android:layout_marginBottom="24dp"
-                                android:contentDescription="@string/descriptionImageExpansionIndicatorTipsCountry"
                                 android:background="@color/white"
+                                android:contentDescription="@string/descriptionImageExpansionIndicatorTipsCountry"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -515,9 +510,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/view_tips_country"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            />
+                            android:layout_height="wrap_content" />
 
                     </com.github.florent37.expansionpanel.ExpansionLayout>
 
@@ -542,7 +535,8 @@
                         android:id="@+id/view_remain_cities_country"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"/>
+                        android:layout_margin="8dp"
+                        android:transitionGroup="true" />
 
                 </LinearLayout>
 

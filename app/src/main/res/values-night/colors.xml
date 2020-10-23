@@ -1,18 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#A7D676</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="colorBottomActive">#A7D676</color>
-    <color name="colorBottomInactive">#F2F2EF</color>
-    <color name="colorActivityDefault">#F2F2EF</color>
-    <color name="splashGradientStart">#000000</color>
-    <color name="splashGradientCenter">#445730</color>
-    <color name="splashGradientEnd">#FFFFFF</color>
-    <color name="colorSplashText">#FFFFFF</color>
-    <color name="colorCardBackground">#FFFFFF</color>
-    <color name="colorCardBackgroundClick">#A7D676</color>
-    <color name="cityGradientCenter">#99FFFFFF</color>
-    <color name="cityGradientEnd">#000000</color>
-    <color name="cityGradientStart">#00FFFFFF</color>
+
 </resources>
