@@ -25,6 +25,7 @@ import com.app.travelbuddy.ui.interfaces.CardAttractionListener
 import com.app.travelbuddy.ui.interfaces.CardServiceListener
 import com.app.travelbuddy.ui.model.AttractionCityModel
 import com.app.travelbuddy.ui.model.ServiceCityModel
+import com.app.travelbuddy.ui.model.ServiceCityReviewModel
 import com.app.travelbuddy.ui.model.TipModel
 import com.app.travelbuddy.ui.viewmodel.CityViewModel
 import com.app.travelbuddy.utils.Resource
@@ -98,14 +99,14 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
             val extras = FragmentNavigatorExtras(
                 cardView to cityTransitionName
             )
-            val direction = CityFragmentDirections.navigateToMainCityService()
+            val direction = CityFragmentDirections.navigateToMainCityService(serviceModel)
             it.findNavController().navigate(direction, extras)
         }
     }
 
     private fun setupObservers() {
 
-        cityViewModel.getDetailByCountryAndCity(cityData.city, cityData.country)
+        cityViewModel.getDetailByCountryAndCity(cityData.country, cityData.city)
             .observe(viewLifecycleOwner, {
                 when (it.status) {
                     Resource.Status.LOADING -> {
@@ -171,7 +172,7 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
         binding.viewTipsCity.adapter = tipCityAdapter
     }
 
-    private fun setUI(response: CityDetailResponse) {
+    private fun setUI(response: List<CityDetailResponse>) {
         val df = DecimalFormat("#.##")
         binding.cardCityTitle.text = cityData.city.capitalizeWords()
         binding.cardCityRanking.rating = cityData.ranking.toFloat()
@@ -185,30 +186,96 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
                 .into(binding.cardCityImage)
         }
 
-        response.entity_type
+        var serviceTransport: ServiceCityModel? = null
+        var serviceTransportService: ServiceCityModel? = null
+        var serviceActivity: ServiceCityModel? = null
+        var serviceFood: ServiceCityModel? = null
+        var serviceFoodAttraction: ServiceCityModel? = null
+        var serviceService: ServiceCityModel? = null
+        var serviceEnvironment: ServiceCityModel? = null
 
-        val listAttraction = listOf(
-            AttractionCityModel("Atracccion 1"),
-            AttractionCityModel("Atracccion 2"),
-            AttractionCityModel("Atracccion 3"),
-            AttractionCityModel("Atracccion 4"),
-            AttractionCityModel("Atracccion 5"),
-            AttractionCityModel("Atracccion 6"),
-            AttractionCityModel("Atracccion 7")
-        )
-        attractionCityAdapter.update(listAttraction)
+        response.forEach { entity ->
+            when {
+                entity.entity_type.compareTo("ATTRACTION", true) == 0 -> {
+                    val listAttraction = mutableListOf<AttractionCityModel>()
+                    entity.entity_value.forEach { listAttraction += AttractionCityModel(it) }
+                    attractionCityAdapter.update(listAttraction)
+                }
+                entity.entity_type.compareTo("TRANSPORT", true) == 0 -> {
+                    serviceTransport = ServiceCityModel(
+                        getString(R.string.featureTransport),
+                        entity.score_average.toDouble(),
+                        entity.reviews.size,
+                        entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
+                        R.drawable.ic_feature_transport
+                    )
+                }
+                entity.entity_type.compareTo("TRANSPORT_SERVICE", true) == 0 -> {
+                    serviceTransportService = ServiceCityModel(
+                        getString(R.string.featureTransportService),
+                        entity.score_average.toDouble(),
+                        entity.reviews.size,
+                        entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
+                        R.drawable.ic_feature_transport
+                    )
+                }
+                entity.entity_type.compareTo("ACTIVITY", true) == 0 -> {
+                    serviceActivity = ServiceCityModel(
+                        getString(R.string.featureActivity),
+                        entity.score_average.toDouble(),
+                        entity.reviews.size,
+                        entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
+                        R.drawable.ic_feature_activity
+                    )
+                }
+                entity.entity_type.compareTo("FOOD", true) == 0 -> {
+                    serviceFood = ServiceCityModel(
+                        getString(R.string.featureFood),
+                        entity.score_average.toDouble(),
+                        entity.reviews.size,
+                        entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
+                        R.drawable.ic_feature_food
+                    )
+                }
+                entity.entity_type.compareTo("ATTRACTION_FOOD", true) == 0 -> {
+                    serviceFoodAttraction = ServiceCityModel(
+                        getString(R.string.featureFoodAttraction),
+                        entity.score_average.toDouble(),
+                        entity.reviews.size,
+                        entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
+                        R.drawable.ic_feature_food
+                    )
+                }
+                entity.entity_type.compareTo("SERVICE", true) == 0 -> {
+                    serviceService = ServiceCityModel(
+                        getString(R.string.featureService),
+                        entity.score_average.toDouble(),
+                        entity.reviews.size,
+                        entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
+                        R.drawable.ic_feature_service
+                    )
+                }
+                entity.entity_type.compareTo("ENVIRONMENT", true) == 0 -> {
+                    serviceEnvironment = ServiceCityModel(
+                        getString(R.string.featureEnvironment),
+                        entity.score_average.toDouble(),
+                        entity.reviews.size,
+                        entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
+                        R.drawable.ic_feature_activity
+                    )
+                }
+            }
+        }
 
-
-        val listService = listOf(
-            ServiceCityModel("Service 1", 3.5, 1000, R.drawable.ic_feature_transport),
-            ServiceCityModel("Service 2", 3.5, 1000, R.drawable.ic_feature_transport),
-            ServiceCityModel("Service 3", 3.5, 1000, R.drawable.ic_feature_transport),
-            ServiceCityModel("Service 4", 3.5, 1000, R.drawable.ic_feature_transport),
-            ServiceCityModel("Service 5", 3.5, 1000, R.drawable.ic_feature_transport),
-            ServiceCityModel("Service 6", 3.5, 1000, R.drawable.ic_feature_transport)
-        )
+        val listService = mutableListOf<ServiceCityModel>()
+        serviceTransport?.let { listService += it }
+        serviceTransportService?.let { listService += it }
+        serviceActivity?.let { listService += it }
+        serviceFood?.let { listService += it }
+        serviceFoodAttraction?.let { listService += it }
+        serviceService?.let { listService += it }
+        serviceEnvironment?.let { listService += it }
         serviceCityAdapter.update(listService)
-
 
         val listTips = listOf(
             TipModel("Descripcion 1", "Valor"),
@@ -216,6 +283,5 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
             TipModel("Descripcion 3", "Valor"),
         )
         tipCityAdapter.update(listTips)
-
     }
 }

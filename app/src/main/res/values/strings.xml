@@ -41,5 +41,14 @@
     <string name="descriptionIconServiceCity">Icono del servicio</string>
     <string name="serviceCardReviewAmount">(%1$d)</string>
     <string name="descriptionImageReviewServiceCity">Resena del Servicio</string>
-    <string name="no_date">Sin Fecha</string>
+    <string name="noDate">Sin Fecha</string>
+
+
+    <string name="featureFood">Gastronomia</string>
+    <string name="featureFoodAttraction">Restaurantes</string>
+    <string name="featureActivity">Excursiones</string>
+    <string name="featureService">Servicios</string>
+    <string name="featureTransport">Transporte</string>
+    <string name="featureTransportService">Movilidad</string>
+    <string name="featureEnvironment">Entorno</string>
 </resources>

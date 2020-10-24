@@ -5,7 +5,8 @@ data class CityDetailResponse(
     val city: String,
     val entity_type: String,
     val score_average: Number,
-    val entity_value: List<CityDetailReviewResponse>,
+    val entity_value: List<String>,
+    val reviews: List<CityDetailReviewResponse>,
 )
 
 data class CityDetailReviewResponse(

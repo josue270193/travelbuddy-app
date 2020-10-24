@@ -65,8 +65,8 @@ class CountryRepository @Inject constructor(
         onFetchFailed = { _, _ -> }
     )
 
-    fun getDetailByCountryAndCity(city: String, country: String) = liveData(Dispatchers.IO) {
+    fun getDetailByCountryAndCity(country: String, city: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
-        emit(remoteDataSource.getDetailByCountryAndCity(city, country))
+        emit(remoteDataSource.getDetailByCountryAndCity(country, city))
     }
 }

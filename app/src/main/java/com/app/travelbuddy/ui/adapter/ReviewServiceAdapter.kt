@@ -51,6 +51,6 @@ class ReviewServiceAdapter(private var reviewList: List<ReviewServiceModel>) :
     }
 
     companion object {
-        const val VALUE_GOOD = 2.5
+        const val VALUE_GOOD = 3.0
     }
 }

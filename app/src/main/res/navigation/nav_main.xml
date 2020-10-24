@@ -48,6 +48,8 @@
         android:id="@+id/main_city_service"
         android:name="com.app.travelbuddy.ui.fragment.main.CityServiceFragment"
         tools:layout="@layout/fragment_main_city_service">
-
+        <argument
+            android:name="serviceData"
+            app:argType="com.app.travelbuddy.ui.model.ServiceCityModel" />
     </fragment>
 </navigation>

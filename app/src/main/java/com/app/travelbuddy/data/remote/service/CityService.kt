@@ -19,5 +19,5 @@ interface CityService {
     suspend fun getDetailByCountryAndCity(
         @Query("country") country: String,
         @Query("city") city: String
-    ): Response<CityDetailResponse>
+    ): Response<List<CityDetailResponse>>
 }

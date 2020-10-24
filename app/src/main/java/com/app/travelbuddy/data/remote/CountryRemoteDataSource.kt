@@ -14,8 +14,8 @@ class CountryRemoteDataSource @Inject constructor(
         getResult { countryService.getByCountryAndSort(country, sort) }
 
 
-    suspend fun getDetailByCountryAndCity(city: String, country: String) =
-        getResult { countryService.getDetailByCountryAndCity(city, country) }
+    suspend fun getDetailByCountryAndCity(country: String, city: String) =
+        getResult { countryService.getDetailByCountryAndCity(country, city) }
 
 
     suspend fun getIpInformation() = getResult {

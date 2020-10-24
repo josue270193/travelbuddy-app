@@ -11,9 +11,9 @@ class CityViewModel @ViewModelInject constructor(private val countryRepository: 
     ViewModel() {
 
     fun getDetailByCountryAndCity(
-        city: String,
-        country: String
-    ): LiveData<Resource<CityDetailResponse>> {
-        return countryRepository.getDetailByCountryAndCity(city, country)
+        country: String,
+        city: String
+    ): LiveData<Resource<List<CityDetailResponse>>> {
+        return countryRepository.getDetailByCountryAndCity(country, city)
     }
 }

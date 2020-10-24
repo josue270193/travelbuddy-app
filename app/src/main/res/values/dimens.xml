@@ -25,4 +25,5 @@
     <dimen name="gridTipsSpacing">16dp</dimen>
     <dimen name="toolbarIconSize">48dp</dimen>
     <dimen name="cityServiceTitleMarginHorizontal">20dp</dimen>
+    <dimen name="serviceTitleHeight">400dp</dimen>
 </resources>

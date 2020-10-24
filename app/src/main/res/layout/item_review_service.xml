@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:textAppearance="?attr/textAppearanceCaption"
-                android:text="@string/no_date" />
+                android:text="@string/noDate" />
 
             <TextView
                 android:id="@+id/review_service_text"
