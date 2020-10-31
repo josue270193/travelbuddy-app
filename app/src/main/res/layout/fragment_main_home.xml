@@ -130,7 +130,7 @@
                                     android:layout_height="@dimen/heightCardHomeOther"
                                     android:scaleType="centerCrop"
                                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerRounded16"
-                                    app:srcCompat="@color/colorPrimaryDark" />
+                                    app:srcCompat="@drawable/ic_placeholder_image" />
 
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
@@ -230,7 +230,7 @@
                                     android:layout_height="@dimen/heightCardHomeFirst"
                                     android:scaleType="centerCrop"
                                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerRounded16"
-                                    app:srcCompat="@color/colorPrimaryDark" />
+                                    app:srcCompat="@drawable/ic_placeholder_image" />
 
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
@@ -331,7 +331,7 @@
                                     android:layout_height="@dimen/heightCardHomeOther"
                                     android:scaleType="centerCrop"
                                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerRounded16"
-                                    app:srcCompat="@color/colorPrimaryDark" />
+                                    app:srcCompat="@drawable/ic_placeholder_image" />
 
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
@@ -377,7 +377,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.33" />
+                        app:layout_constraintGuide_percent="0.2" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -4,21 +4,17 @@ import java.util.*
 
 data class CountryResponse(
     val country: CountryDetail,
-    val cities: List<CityResponse>,
+    val cities: List<CityDetail>,
 )
 
-data class CityResponse(
-    val _id: String,
-    val city: CityDetail,
+data class CityDetail(
+    val id: String,
+    val name: String,
+    val wiki: WikiDetailDto? = null,
     val rating_average: Number
 )
 
 data class CountryDetail(
-    val name: String,
-    val wiki: WikiDetailDto? = null
-)
-
-data class CityDetail(
     val name: String,
     val wiki: WikiDetailDto? = null
 )

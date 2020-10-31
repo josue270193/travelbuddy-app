@@ -8,7 +8,7 @@
     <dimen name="cityFeatureIconHeight">60dp</dimen>
     <dimen name="cityTitleMarginHorizontal">30dp</dimen>
     <dimen name="cityTitleMarginTop">200dp</dimen>
-    <dimen name="cityTitleHeight">800dp</dimen>
+    <dimen name="cityTitleHeight">750dp</dimen>
     <dimen name="cityTitleRankingMarginTop">-15dp</dimen>
     <dimen name="cityTitleRankingMarginBottom">20dp</dimen>
     <dimen name="buttonCircleRankingPrimarySize">56dp</dimen>

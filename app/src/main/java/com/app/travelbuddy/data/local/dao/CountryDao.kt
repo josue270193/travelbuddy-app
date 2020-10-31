@@ -57,9 +57,9 @@ interface CountryDao {
         val countryId = insert(country)
 
         val cities = response.cities.map {
-            val city = City(it._id, it.city.name, it.rating_average.toDouble())
+            val city = City(it.id, it.name, it.rating_average.toDouble())
             city.countryId = countryId
-            it.city.wiki?.images?.value?.let { cityWikiImages ->
+            it.wiki?.images?.value?.let { cityWikiImages ->
                 city.imageUrl = cityWikiImages.getOrNull(0)
             }
             city
