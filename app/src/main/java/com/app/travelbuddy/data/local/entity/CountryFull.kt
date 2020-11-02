@@ -11,7 +11,7 @@ data class CountryFull(
         entityColumn = "countryId",
         entity = City::class
     )
-    val cities: List<City>
+    val cities: List<CityFull>
 ) {
     @Relation(
         parentColumn = "id",

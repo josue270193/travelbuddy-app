@@ -25,6 +25,8 @@
     <color name="rewiewGoodGradientEnd">#A7D676</color>
     <color name="rewiewBadGradientStart">#FFEA77</color>
     <color name="rewiewBadGradientEnd">#D6607D</color>
+    <color name="rewiewGoodBadGradientStart">#8BC3D6</color>
+    <color name="rewiewGoodBadGradientEnd">#D0D3D9</color>
 
     <color name="colorCardBackground">#FFFFFF</color>
     <color name="colorCardBackgroundClick">#A7D676</color>
@@ -38,6 +40,14 @@
 
     <color name="white">#FFFFFF</color>
 
-    <color name="colorCountryTipCurrency">#FFEA77</color>
+    <color name="colorTipsCurrency">#A7D676</color>
+    <color name="colorTipsPopulation">#FFEA77</color>
+    <color name="colorTipsDemonym">#8BC3D6</color>
+    <color name="colorTipsEmoji">#D6607D</color>
+    <color name="colorTipsGeolocation">#A7D676</color>
+    <color name="colorTipsWebpage">#D6607D</color>
+    <color name="colorTipsMore">#A7D676</color>
+    <color name="colorTipsLanguage">#A7D676</color>
+
     <color name="colorCardAttraction">#0D000000</color>
 </resources>

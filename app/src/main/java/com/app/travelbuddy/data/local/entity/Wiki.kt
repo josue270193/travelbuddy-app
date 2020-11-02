@@ -12,6 +12,6 @@ data class Wiki(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-
     var countryId: Long? = null
+    var cityId: String? = null
 }

@@ -1,7 +1,12 @@
 package com.app.travelbuddy.ui.fragment.main
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,15 +24,17 @@ import com.app.travelbuddy.data.remote.dto.CityDetailResponse
 import com.app.travelbuddy.databinding.FragmentMainCityBinding
 import com.app.travelbuddy.ui.adapter.AttractionCityAdapter
 import com.app.travelbuddy.ui.adapter.ServiceCityAdapter
-import com.app.travelbuddy.ui.adapter.TipCountryAdapter
-import com.app.travelbuddy.ui.fragment.main.CityFragmentArgs.Companion.fromBundle
+import com.app.travelbuddy.ui.adapter.TipsCardAdapter
 import com.app.travelbuddy.ui.interfaces.CardAttractionListener
 import com.app.travelbuddy.ui.interfaces.CardServiceListener
+import com.app.travelbuddy.ui.interfaces.CardTipsListener
 import com.app.travelbuddy.ui.model.AttractionCityModel
 import com.app.travelbuddy.ui.model.ServiceCityModel
 import com.app.travelbuddy.ui.model.ServiceCityReviewModel
 import com.app.travelbuddy.ui.model.TipModel
+import com.app.travelbuddy.ui.model.enumeration.TypeTipModel
 import com.app.travelbuddy.ui.viewmodel.CityViewModel
+import com.app.travelbuddy.utils.ConstantUtil
 import com.app.travelbuddy.utils.Resource
 import com.app.travelbuddy.utils.StringUtil.capitalizeWords
 import com.bumptech.glide.Glide
@@ -38,18 +45,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.text.DecimalFormat
 
-
 @AndroidEntryPoint
-class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
+class CityFragment : Fragment(), CardAttractionListener, CardServiceListener, CardTipsListener {
 
     private var attractionCityAdapter = AttractionCityAdapter(listOf(), this)
     private var serviceCityAdapter = ServiceCityAdapter(listOf(), this)
-    private var tipCityAdapter = TipCountryAdapter(listOf())
+    private var tipCityAdapter = TipsCardAdapter(listOf(), this, 3)
 
     private lateinit var binding: FragmentMainCityBinding
 
     private val cityData by lazy {
-        fromBundle(requireArguments()).cityData
+        CityFragmentArgs.fromBundle(requireArguments()).cityData
     }
     private val cityViewModel: CityViewModel by viewModels()
 
@@ -77,7 +83,7 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
         setupObservers()
     }
 
-    override fun onClickCard(
+    override fun onClickCardAttraction(
         attractionModel: AttractionCityModel,
         cardView: MaterialCardView
     ): View.OnClickListener {
@@ -102,6 +108,49 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
             val direction = CityFragmentDirections.navigateToMainCityService(serviceModel)
             it.findNavController().navigate(direction, extras)
         }
+    }
+
+    override fun onClickCardTips(
+        tipModel: TipModel,
+        cardView: MaterialCardView
+    ): View.OnClickListener {
+        return View.OnClickListener {
+            when (tipModel.type) {
+                TypeTipModel.WEBPAGE -> {
+                    val url = tipModel.value
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(url)
+                    startActivity(intent)
+                }
+                TypeTipModel.GEOLOCATION -> {
+                    val gmmIntentUri = Uri.parse(tipModel.value)
+                    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                    mapIntent.setPackage(ConstantUtil.PACKAGE_GOOGLE_MAPS)
+                    activity?.packageManager?.let { packageManager ->
+                        mapIntent.resolveActivity(packageManager)?.let {
+                            startActivity(mapIntent)
+                        }
+                    }
+                }
+                else -> {
+                    context?.copyToClipboard(tipModel.value)
+                    Snackbar.make(
+                        binding.scrollCity,
+                        "Se ha copiado el valor",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    private fun Context.copyToClipboard(text: String) {
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip =
+            ClipData.newPlainText(
+                getString(R.string.appName), text
+            )
+        clipboard.setPrimaryClip(clip)
     }
 
     private fun setupObservers() {
@@ -176,7 +225,8 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
         val df = DecimalFormat("#.##")
         binding.cardCityTitle.text = cityData.city.capitalizeWords()
         binding.cardCityRanking.rating = cityData.ranking.toFloat()
-        binding.cardCityRankingTitle.text = df.format(cityData.ranking)
+        binding.cardCityRankingTitle.text =
+            getString(R.string.descriptionRankingCity, df.format(cityData.ranking))
         cityData.imageUrl?.let { url ->
             val urlFull = url.substringBefore('?')
             Glide.with(this).load(urlFull)
@@ -206,8 +256,10 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
                         getString(R.string.featureTransport),
                         entity.score_average.toDouble(),
                         entity.reviews.size,
+                        entity.entity_value,
                         entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
-                        R.drawable.ic_feature_transport
+                        R.drawable.ic_feature_transport,
+                        R.drawable.im_feature_transport
                     )
                 }
                 entity.entity_type.compareTo("TRANSPORT_SERVICE", true) == 0 -> {
@@ -215,8 +267,10 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
                         getString(R.string.featureTransportService),
                         entity.score_average.toDouble(),
                         entity.reviews.size,
+                        entity.entity_value,
                         entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
-                        R.drawable.ic_feature_transport
+                        R.drawable.ic_feature_transport_service,
+                        R.drawable.im_feature_transport_service
                     )
                 }
                 entity.entity_type.compareTo("ACTIVITY", true) == 0 -> {
@@ -224,8 +278,10 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
                         getString(R.string.featureActivity),
                         entity.score_average.toDouble(),
                         entity.reviews.size,
+                        entity.entity_value,
                         entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
-                        R.drawable.ic_feature_activity
+                        R.drawable.ic_feature_activity,
+                        R.drawable.im_feature_activity
                     )
                 }
                 entity.entity_type.compareTo("FOOD", true) == 0 -> {
@@ -233,8 +289,10 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
                         getString(R.string.featureFood),
                         entity.score_average.toDouble(),
                         entity.reviews.size,
+                        entity.entity_value,
                         entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
-                        R.drawable.ic_feature_food
+                        R.drawable.ic_feature_food,
+                        R.drawable.im_feature_food
                     )
                 }
                 entity.entity_type.compareTo("ATTRACTION_FOOD", true) == 0 -> {
@@ -242,8 +300,10 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
                         getString(R.string.featureFoodAttraction),
                         entity.score_average.toDouble(),
                         entity.reviews.size,
+                        entity.entity_value,
                         entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
-                        R.drawable.ic_feature_food
+                        R.drawable.ic_feature_attraction_food,
+                        R.drawable.im_feature_attraction_food
                     )
                 }
                 entity.entity_type.compareTo("SERVICE", true) == 0 -> {
@@ -251,8 +311,10 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
                         getString(R.string.featureService),
                         entity.score_average.toDouble(),
                         entity.reviews.size,
+                        entity.entity_value,
                         entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
-                        R.drawable.ic_feature_service
+                        R.drawable.ic_feature_service,
+                        R.drawable.im_feature_service
                     )
                 }
                 entity.entity_type.compareTo("ENVIRONMENT", true) == 0 -> {
@@ -260,8 +322,10 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
                         getString(R.string.featureEnvironment),
                         entity.score_average.toDouble(),
                         entity.reviews.size,
+                        entity.entity_value,
                         entity.reviews.map { ServiceCityReviewModel(it.text, it.score.toDouble()) },
-                        R.drawable.ic_feature_activity
+                        R.drawable.ic_feature_environment,
+                        R.drawable.im_feature_environment
                     )
                 }
             }
@@ -277,11 +341,8 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener {
         serviceEnvironment?.let { listService += it }
         serviceCityAdapter.update(listService)
 
-        val listTips = listOf(
-            TipModel("Descripcion 1", "Valor"),
-            TipModel("Descripcion 2", "Valor"),
-            TipModel("Descripcion 3", "Valor"),
-        )
-        tipCityAdapter.update(listTips)
+        cityData.tips?.let {
+            tipCityAdapter.update(it)
+        }
     }
 }

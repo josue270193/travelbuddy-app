@@ -59,7 +59,7 @@ class AttractionCityAdapter(
                     .transition(withCrossFade())
                     .into(itemImage)
             }
-            itemCard.setOnClickListener(attractionListener.onClickCard(item, itemCard))
+            itemCard.setOnClickListener(attractionListener.onClickCardAttraction(item, itemCard))
         }
     }
 }

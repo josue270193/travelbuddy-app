@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tip_country_card"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tips_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="0dp"
@@ -9,31 +10,49 @@
     android:focusable="true">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tips_icon"
+            android:layout_width="@dimen/tipsIconWidth"
+            android:layout_height="@dimen/tipsIconHeight"
+            android:contentDescription="@string/descriptionTipsIcon"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_logo"
+            app:tint="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
         <TextView
-            android:id="@+id/tip_country_description"
+            android:id="@+id/tips_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            tools:text="Descripcion" />
+            tools:text="Descripcion"
+            app:layout_constraintTop_toBottomOf="@id/tips_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
         <TextView
-            android:id="@+id/tip_country_value"
+            android:id="@+id/tips_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:gravity="end"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary"
-            tools:text="Valor" />
+            tools:text="Valor"
+            app:layout_constraintTop_toBottomOf="@id/tips_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </com.google.android.material.card.MaterialCardView>

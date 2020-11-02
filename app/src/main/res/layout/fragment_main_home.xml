@@ -120,7 +120,7 @@
                                         android:gravity="center"
                                         android:textAppearance="?attr/textAppearanceOverline"
                                         android:textColor="@color/colorTitleRanking"
-                                        tools:text="4.88" />
+                                        tools:text="4.88 / 5" />
 
                                 </LinearLayout>
 
@@ -220,7 +220,7 @@
                                         android:gravity="center"
                                         android:textAppearance="?attr/textAppearanceOverline"
                                         android:textColor="@color/colorTitleRanking"
-                                        tools:text="4.99" />
+                                        tools:text="4.99 / 5" />
 
                                 </LinearLayout>
 
@@ -321,7 +321,7 @@
                                         android:gravity="center"
                                         android:textAppearance="?attr/textAppearanceOverline"
                                         android:textColor="@color/colorTitleRanking"
-                                        tools:text="4.00" />
+                                        tools:text="4.00 / 5" />
 
                                 </LinearLayout>
 
@@ -477,7 +477,7 @@
                                 android:layout_marginBottom="16dp"
                                 android:text="@string/titleCountryTipsSubtitle"
                                 android:textAppearance="?attr/textAppearanceOverline"
-                                android:textColor="@color/colorTitleRanking"
+                                android:textColor="@color/colorTextDark"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@id/expansion_indicator_tips_country"
                                 app:layout_constraintStart_toStartOf="parent"

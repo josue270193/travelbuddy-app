@@ -24,6 +24,7 @@ data class WikiDetailDto(
     val labels: String? = null,
     val descriptions: String? = null,
     val images: DataImage? = null,
+    val banner: DataImage? = null,
     val population: DataPopulation? = null,
     val geolocation: DataLocation? = null,
     val webpage: DataWebPage? = null,

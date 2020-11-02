@@ -6,5 +6,5 @@ import com.app.travelbuddy.ui.model.CityModel
 import com.google.android.material.card.MaterialCardView
 
 interface CardCityListener {
-    fun onClickCard(city: CityModel, cardView: MaterialCardView): View.OnClickListener
+    fun onClickCardRemainCity(city: CityModel, cardView: MaterialCardView): View.OnClickListener
 }

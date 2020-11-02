@@ -56,13 +56,14 @@ class RemainCityCountryAdapter(
             itemCard.transitionName =
                 resources.getString(R.string.cityCardTransitionName, transitionName)
             itemTitle.text = item.city.capitalizeWords()
-            itemRanking.text = df.format(item.ranking)
+            itemRanking.text =
+                resources.getString(R.string.descriptionRankingCity, df.format(item.ranking))
             item.imageUrl?.let {
                 Glide.with(itemImage.context).load(it)
                     .transition(withCrossFade())
                     .into(itemImage)
             }
-            itemCard.setOnClickListener(cardListenerListener.onClickCard(item, itemCard))
+            itemCard.setOnClickListener(cardListenerListener.onClickCardRemainCity(item, itemCard))
         }
     }
 }

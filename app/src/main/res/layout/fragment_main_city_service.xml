@@ -21,7 +21,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_city_service_header"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/serviceTitleHeight"
+                android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -29,48 +29,40 @@
                 <ImageView
                     android:id="@+id/card_city_service_image"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="300dp"
                     android:contentDescription="@string/contentDescriptionCityImage"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@color/colorPrimaryDark" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/gradient_city" />
+                    app:srcCompat="@drawable/im_feature_environment" />
 
                 <LinearLayout
                     android:id="@+id/layout_city_service_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/cityTitleMarginHorizontal"
-                    android:layout_marginTop="@dimen/cityTitleMarginTop"
-                    android:layout_marginBottom="8dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent">
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_city_service_image">
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="16dp">
+                            android:padding="20dp">
 
                             <TextView
                                 android:id="@+id/city_service_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textAppearance="?attr/textAppearanceHeadline1"
                                 android:textAlignment="center"
+                                android:textAppearance="?attr/textAppearanceHeadline1"
                                 tools:text="Descripcion" />
 
                             <RatingBar
@@ -90,11 +82,100 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/layout_city_service_reviews"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_city_service_header">
+
+                <com.github.florent37.expansionpanel.ExpansionHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    app:expansion_headerIndicator="@id/expansion_indicator_tips_service"
+                    app:expansion_layout="@id/expansion_tips_service"
+                    app:expansion_toggleOnClick="true">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_gradient_tips">
+
+                        <TextView
+                            android:id="@+id/expansion_title_tips_service"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/titleServiceTips"
+                            android:textAppearance="?attr/textAppearanceHeadline2"
+                            android:textColor="@color/colorTextDark"
+                            app:layout_constraintBottom_toTopOf="@id/expansion_subtitle_tips_service"
+                            app:layout_constraintEnd_toStartOf="@id/expansion_indicator_tips_service"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/expansion_subtitle_tips_service"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginBottom="16dp"
+                            android:text="@string/titleServiceTipsSubtitle"
+                            android:textAppearance="?attr/textAppearanceOverline"
+                            android:textColor="@color/colorTextDark"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/expansion_indicator_tips_service"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/expansion_title_tips_service" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/expansion_indicator_tips_service"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="32dp"
+                            android:layout_marginBottom="24dp"
+                            android:background="@color/white"
+                            android:contentDescription="@string/descriptionImageExpansionIndicatorTipsCountry"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+                            app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                <com.github.florent37.expansionpanel.ExpansionLayout
+                    android:id="@+id/expansion_tips_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp">
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/view_tips_service"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                </com.github.florent37.expansionpanel.ExpansionLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/layout_city_service_reviews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/layout_city_service_header"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
@@ -102,8 +183,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/view_city_service_reviews"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

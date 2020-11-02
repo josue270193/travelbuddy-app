@@ -1,8 +1,7 @@
 package com.app.travelbuddy.ui.fragment.main
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
@@ -21,12 +20,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.travelbuddy.R
 import com.app.travelbuddy.data.local.SharedPreferenceStringLiveData
 import com.app.travelbuddy.data.local.entity.CountryFull
+import com.app.travelbuddy.data.local.entity.WikiFull
 import com.app.travelbuddy.databinding.FragmentMainHomeBinding
 import com.app.travelbuddy.ui.adapter.RemainCityCountryAdapter
-import com.app.travelbuddy.ui.adapter.TipCountryAdapter
+import com.app.travelbuddy.ui.adapter.TipsCardAdapter
 import com.app.travelbuddy.ui.interfaces.CardCityListener
+import com.app.travelbuddy.ui.interfaces.CardTipsListener
 import com.app.travelbuddy.ui.model.CityModel
 import com.app.travelbuddy.ui.model.TipModel
+import com.app.travelbuddy.ui.model.enumeration.TypeTipModel
 import com.app.travelbuddy.ui.viewmodel.CountryViewModel
 import com.app.travelbuddy.utils.ConstantUtil
 import com.app.travelbuddy.utils.Resource
@@ -43,11 +45,11 @@ import java.text.DecimalFormat
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), CardCityListener {
+class HomeFragment : Fragment(), CardCityListener, CardTipsListener {
 
     private lateinit var binding: FragmentMainHomeBinding
     private lateinit var urlMapCountry: String
-    private var tipCountryAdapter = TipCountryAdapter(listOf())
+    private var tipCountryAdapter = TipsCardAdapter(listOf(), this, 5)
     private var remainCityCountryAdapter = RemainCityCountryAdapter(listOf(), this)
 
     @Inject
@@ -98,7 +100,7 @@ class HomeFragment : Fragment(), CardCityListener {
         super.onPause()
     }
 
-    override fun onClickCard(
+    override fun onClickCardRemainCity(
         city: CityModel,
         cardView: MaterialCardView
     ): View.OnClickListener {
@@ -110,6 +112,39 @@ class HomeFragment : Fragment(), CardCityListener {
             val direction = HomeFragmentDirections.navigateToMainCity(city)
             it.findNavController().navigate(direction, extras)
         }
+    }
+
+    override fun onClickCardTips(
+        tipModel: TipModel,
+        cardView: MaterialCardView
+    ): View.OnClickListener {
+        return View.OnClickListener {
+            when (tipModel.type) {
+                TypeTipModel.WEBPAGE -> {
+                    val url = tipModel.value
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(url)
+                    startActivity(intent)
+                }
+                else -> {
+                    context?.copyToClipboard(tipModel.value)
+                    Snackbar.make(
+                        binding.scrollHome,
+                        "Se ha copiado el valor",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    private fun Context.copyToClipboard(text: String) {
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip =
+            ClipData.newPlainText(
+                getString(R.string.appName), text
+            )
+        clipboard.setPrimaryClip(clip)
     }
 
     private fun setupObservers() {
@@ -218,7 +253,13 @@ class HomeFragment : Fragment(), CardCityListener {
 
         // TITLE COUNTRY
         wiki?.wikiGeolocation?.let {
-            urlMapCountry = "geo:${it.latitude},${it.longitude}?z=${it.precision}"
+            urlMapCountry =
+                getString(
+                    R.string.valueGeolocationMaps,
+                    it.latitude.toString(),
+                    it.longitude.toString(),
+                    it.precision.toString()
+                )
         }
         country.name.let {
             binding.titleCountry.text = it.capitalizeWords()
@@ -228,23 +269,25 @@ class HomeFragment : Fragment(), CardCityListener {
         val firstCity = cities.getOrNull(0)
         if (firstCity != null) {
             val df = DecimalFormat("#.##")
-            val name = firstCity.name
+            val name = firstCity.city.name
             binding.cardHomeFirst.transitionName = StringUtil.toSnakeCase(name)
             binding.cardHomeFirstTitle.text = name.capitalizeWords()
-            binding.cardHomeFirstRanking.text = df.format(firstCity.ranking)
+            binding.cardHomeFirstRanking.text =
+                getString(R.string.descriptionRankingCity, df.format(firstCity.city.ranking))
             binding.cardHomeFirst.setOnClickListener(
-                onClickCard(
+                onClickCardRemainCity(
                     CityModel(
-                        firstCity.id,
-                        firstCity.name,
+                        firstCity.city.id,
+                        firstCity.city.name,
                         country.name,
-                        firstCity.ranking,
-                        firstCity.imageUrl
+                        firstCity.city.ranking,
+                        firstCity.city.imageUrl,
+                        buildTipsCity(firstCity.wiki)
                     ),
                     binding.cardHomeFirst
                 )
             )
-            val urlImageCity = firstCity.imageUrl
+            val urlImageCity = firstCity.city.imageUrl
             urlImageCity?.let {
                 Glide.with(this).load(it)
                     .transition(withCrossFade())
@@ -258,23 +301,25 @@ class HomeFragment : Fragment(), CardCityListener {
         val secondCity = cities.getOrNull(1)
         if (secondCity != null) {
             val df = DecimalFormat("#.##")
-            val name = secondCity.name
+            val name = secondCity.city.name
             binding.cardHomeSecond.transitionName = StringUtil.toSnakeCase(name)
             binding.cardHomeSecondTitle.text = name.capitalizeWords()
-            binding.cardHomeSecondRanking.text = df.format(secondCity.ranking)
+            binding.cardHomeSecondRanking.text =
+                getString(R.string.descriptionRankingCity, df.format(secondCity.city.ranking))
             binding.cardHomeSecond.setOnClickListener(
-                onClickCard(
+                onClickCardRemainCity(
                     CityModel(
-                        secondCity.id,
-                        secondCity.name,
+                        secondCity.city.id,
+                        secondCity.city.name,
                         country.name,
-                        secondCity.ranking,
-                        secondCity.imageUrl
+                        secondCity.city.ranking,
+                        secondCity.city.imageUrl,
+                        buildTipsCity(secondCity.wiki)
                     ),
                     binding.cardHomeSecond
                 )
             )
-            val urlImageCity = secondCity.imageUrl
+            val urlImageCity = secondCity.city.imageUrl
             urlImageCity?.let {
                 Glide.with(this).load(it)
                     .transition(withCrossFade())
@@ -288,23 +333,25 @@ class HomeFragment : Fragment(), CardCityListener {
         val thirdCity = cities.getOrNull(2)
         if (thirdCity != null) {
             val df = DecimalFormat("#.##")
-            val name = thirdCity.name
+            val name = thirdCity.city.name
             binding.cardHomeThird.transitionName = StringUtil.toSnakeCase(name)
             binding.cardHomeThirdTitle.text = name.capitalizeWords()
-            binding.cardHomeThirdRanking.text = df.format(thirdCity.ranking)
+            binding.cardHomeThirdRanking.text =
+                getString(R.string.descriptionRankingCity, df.format(thirdCity.city.ranking))
             binding.cardHomeThird.setOnClickListener(
-                onClickCard(
+                onClickCardRemainCity(
                     CityModel(
-                        thirdCity.id,
-                        thirdCity.name,
+                        thirdCity.city.id,
+                        thirdCity.city.name,
                         country.name,
-                        thirdCity.ranking,
-                        thirdCity.imageUrl
+                        thirdCity.city.ranking,
+                        thirdCity.city.imageUrl,
+                        buildTipsCity(thirdCity.wiki)
                     ),
                     binding.cardHomeThird
                 )
             )
-            val urlImageCity = thirdCity.imageUrl
+            val urlImageCity = thirdCity.city.imageUrl
             urlImageCity?.let {
                 Glide.with(this).load(it)
                     .transition(withCrossFade())
@@ -318,13 +365,14 @@ class HomeFragment : Fragment(), CardCityListener {
         try {
             cities.slice(3 until cities.size).let {
                 val remainCities = mutableListOf<CityModel>()
-                it.forEach { city ->
+                it.forEach { item ->
                     remainCities += CityModel(
-                        city.id,
-                        city.name,
+                        item.city.id,
+                        item.city.name,
                         country.name,
-                        city.ranking,
-                        city.imageUrl
+                        item.city.ranking,
+                        item.city.imageUrl,
+                        buildTipsCity(item.wiki)
                     )
                 }
                 remainCityCountryAdapter.update(remainCities)
@@ -336,31 +384,111 @@ class HomeFragment : Fragment(), CardCityListener {
         // WIKI COUNTRY
         wiki?.let { wikiData ->
             val tips = mutableListOf<TipModel>()
-            wikiData.wikiPopulation?.let { tips += TipModel(it.description!!, it.value!!) }
+            wikiData.wikiCurrency?.let {
+                tips += TipModel(
+                    TypeTipModel.CURRENCY,
+                    it.description!!,
+                    it.value!!
+                )
+            }
+            wikiData.wikiPopulation?.let {
+                tips += TipModel(
+                    TypeTipModel.POPULATION,
+                    it.description!!,
+                    it.value!!
+                )
+            }
+            wikiData.wikiDemonym?.let {
+                tips += TipModel(
+                    TypeTipModel.DEMONYM,
+                    it.description!!,
+                    it.value!!
+                )
+            }
+            wikiData.wiki.emoji?.let {
+                tips += TipModel(
+                    TypeTipModel.EMOJI,
+                    getString(R.string.countryTipEmoji),
+                    it
+                )
+            }
             wikiData.wikiWebPage?.let { it ->
                 tips += TipModel(
+                    TypeTipModel.WEBPAGE,
                     it.wikiWebPage.description!!,
                     it.wikiWebPageDetails?.map { item -> item.value }?.joinToString()!!
                 )
             }
-            wikiData.wikiGeolocation?.let {
+            wikiData.wikiLanguage?.let {
                 tips += TipModel(
+                    TypeTipModel.LANGUAGE,
                     it.description!!,
-                    "${it.latitude!!}, ${it.longitude!!}"
+                    it.value!!
                 )
             }
-            wikiData.wikiCurrency?.let {
-                tips += TipModel(
-                    it.description!!,
-                    it.value!!,
-                    getString(R.color.colorCountryTipCurrency)
-                )
-            }
-            wikiData.wikiLanguage?.let { tips += TipModel(it.description!!, it.value!!) }
-            wikiData.wikiDemonym?.let { tips += TipModel(it.description!!, it.value!!) }
-            wikiData.wiki.emoji?.let { tips += TipModel(getString(R.string.countryTipEmoji), it) }
             tipCountryAdapter.update(tips)
             Timber.d("tips: ${tips.size}")
         }
+    }
+
+    private fun buildTipsCity(wiki: WikiFull?): List<TipModel> {
+        return wiki?.let { wikiData ->
+            val tips = mutableListOf<TipModel>()
+            wikiData.wikiCurrency?.let {
+                tips += TipModel(
+                    TypeTipModel.CURRENCY,
+                    it.description!!,
+                    it.value!!
+                )
+            }
+            wikiData.wikiPopulation?.let {
+                tips += TipModel(
+                    TypeTipModel.POPULATION,
+                    it.description!!,
+                    it.value!!
+                )
+            }
+            wikiData.wikiDemonym?.let {
+                tips += TipModel(
+                    TypeTipModel.DEMONYM,
+                    it.description!!,
+                    it.value!!
+                )
+            }
+            wikiData.wiki.emoji?.let {
+                tips += TipModel(
+                    TypeTipModel.EMOJI,
+                    getString(R.string.countryTipEmoji),
+                    it
+                )
+            }
+            wikiData.wikiWebPage?.let { it ->
+                tips += TipModel(
+                    TypeTipModel.WEBPAGE,
+                    it.wikiWebPage.description!!,
+                    it.wikiWebPageDetails?.map { item -> item.value }?.joinToString()!!
+                )
+            }
+            wikiData.wikiLanguage?.let {
+                tips += TipModel(
+                    TypeTipModel.LANGUAGE,
+                    it.description!!,
+                    it.value!!
+                )
+            }
+            wikiData.wikiGeolocation?.let {
+                tips += TipModel(
+                    TypeTipModel.GEOLOCATION,
+                    it.description!!,
+                    getString(
+                        R.string.valueGeolocationMaps,
+                        it.latitude.toString(),
+                        it.longitude.toString(),
+                        it.precision.toString()
+                    )
+                )
+            }
+            tips
+        }.orEmpty()
     }
 }

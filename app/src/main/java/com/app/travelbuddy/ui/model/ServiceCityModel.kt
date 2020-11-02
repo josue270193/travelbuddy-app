@@ -8,8 +8,10 @@ class ServiceCityModel(
     val title: String,
     val ranking: Double,
     val reviewAmount: Int,
+    val entities: List<String>,
     val reviews: List<ServiceCityReviewModel>? = listOf(),
-    val image: Int? = null
+    val image: Int? = null,
+    val banner: Int? = null
 ) : Parcelable
 
 @Parcelize

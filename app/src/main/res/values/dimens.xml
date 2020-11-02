@@ -8,7 +8,7 @@
     <dimen name="cityFeatureIconHeight">60dp</dimen>
     <dimen name="cityTitleMarginHorizontal">30dp</dimen>
     <dimen name="cityTitleMarginTop">200dp</dimen>
-    <dimen name="cityTitleHeight">750dp</dimen>
+    <dimen name="cityTitleHeight">800dp</dimen>
     <dimen name="cityTitleRankingMarginTop">-15dp</dimen>
     <dimen name="cityTitleRankingMarginBottom">20dp</dimen>
     <dimen name="buttonCircleRankingPrimarySize">56dp</dimen>
@@ -19,11 +19,13 @@
     <dimen name="countryMoreCitiesTitleMarginStartEnd">20dp</dimen>
     <dimen name="countryMoreCitiesTitleMarginTop">10dp</dimen>
     <dimen name="heightCardHomeOther">150dp</dimen>
-    <dimen name="heightCardHomeFirst">250dp</dimen>
+    <dimen name="heightCardHomeFirst">200dp</dimen>
     <dimen name="chipDefaultElevation">2dp</dimen>
     <dimen name="chipSpacingSearch">10dp</dimen>
     <dimen name="gridTipsSpacing">16dp</dimen>
     <dimen name="toolbarIconSize">48dp</dimen>
     <dimen name="cityServiceTitleMarginHorizontal">20dp</dimen>
-    <dimen name="serviceTitleHeight">400dp</dimen>
+    <dimen name="serviceTitleHeight">300dp</dimen>
+    <dimen name="tipsIconWidth">50dp</dimen>
+    <dimen name="tipsIconHeight">50dp</dimen>
 </resources>

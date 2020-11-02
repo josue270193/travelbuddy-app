@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.travelbuddy.R
 import com.app.travelbuddy.databinding.FragmentMainCityServiceBinding
 import com.app.travelbuddy.ui.adapter.ReviewServiceAdapter
+import com.app.travelbuddy.ui.adapter.TipsServiceAdapter
 import com.app.travelbuddy.ui.fragment.main.CityServiceFragmentArgs.Companion.fromBundle
 import com.app.travelbuddy.ui.model.ReviewServiceModel
+import com.app.travelbuddy.ui.model.TipsServiceModel
 import com.google.android.material.transition.MaterialContainerTransform
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CityServiceFragment : Fragment() {
 
     private var reviewServiceAdapter = ReviewServiceAdapter(listOf())
+    private var tipsServiceAdapter = TipsServiceAdapter(listOf())
 
     private lateinit var binding: FragmentMainCityServiceBinding
 
@@ -54,6 +57,13 @@ class CityServiceFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        // RECOMMENDATION
+        binding.viewTipsService.apply {
+            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+            adapter = tipsServiceAdapter
+        }
+        binding.viewTipsService.adapter = tipsServiceAdapter
+
         // REVIEWS
         binding.viewCityServiceReviews.apply {
             layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
@@ -67,7 +77,12 @@ class CityServiceFragment : Fragment() {
         serviceData.reviews?.map { listReview += ReviewServiceModel(it.text, it.ranking) }
         reviewServiceAdapter.update(listReview)
 
+        val listEntity = mutableListOf<TipsServiceModel>()
+        serviceData.entities.map { listEntity += TipsServiceModel(it) }
+        tipsServiceAdapter.update(listEntity)
+
         binding.cityServiceTitle.text = serviceData.title
         binding.cityServiceRanking.rating = serviceData.ranking.toFloat()
+        serviceData.banner?.let { binding.cardCityServiceImage.setImageResource(it) }
     }
 }

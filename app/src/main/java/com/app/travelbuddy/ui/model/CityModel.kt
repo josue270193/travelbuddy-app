@@ -9,5 +9,6 @@ class CityModel(
     val city: String,
     val country: String,
     val ranking: Double,
-    val imageUrl: String?
+    val imageUrl: String?,
+    val tips: List<TipModel>?
 ) : Parcelable

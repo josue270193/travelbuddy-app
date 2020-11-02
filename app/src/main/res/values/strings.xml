@@ -18,6 +18,10 @@
     <string name="descriptionImageCountryCity">Imagen de la ciudad</string>
     <string name="descriptionImageExpansionIndicatorTipsCountry">Mostrar o Ocultar Tips</string>
     <string name="titleCountryTipsSubtitle">Consejos Generales</string>
+    <string name="descriptionRankingCity">%1$s / 5</string>
+    <string name="valueGeolocationMaps">geo:%1$s,%2$s?z=%3$s</string>
+    <string name="valueTipsGeolocation">Abrir mapa</string>
+    <string name="valueTipsWebpage">Abrir pagina web</string>
 
     <string name="cityCardTransitionName">city_card_detail_%1$s</string>
     <string name="cityCardDetailTransitionName">city_card_detail</string>
@@ -51,4 +55,7 @@
     <string name="featureTransport">Transporte</string>
     <string name="featureTransportService">Movilidad</string>
     <string name="featureEnvironment">Entorno</string>
+    <string name="descriptionTipsIcon">Icono Tips</string>
+    <string name="titleServiceTips">Selección</string>
+    <string name="titleServiceTipsSubtitle">Recomendado por la comunidad</string>
 </resources>

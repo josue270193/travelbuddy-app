@@ -35,14 +35,12 @@
     <fragment
         android:id="@+id/main_discovery"
         android:name="com.app.travelbuddy.ui.fragment.main.DiscoveryFragment"
-        tools:layout="@layout/fragment_main_discovery">
-    </fragment>
+        tools:layout="@layout/fragment_main_discovery" />
 
     <fragment
         android:id="@+id/main_user"
         android:name="com.app.travelbuddy.ui.fragment.main.UserFragment"
-        tools:layout="@layout/fragment_main_user">
-    </fragment>
+        tools:layout="@layout/fragment_main_user" />
 
     <fragment
         android:id="@+id/main_city_service"

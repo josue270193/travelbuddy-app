@@ -26,7 +26,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/card_city_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -36,7 +36,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@color/colorPrimaryDark" />
+                    app:srcCompat="@drawable/ic_placeholder_image" />
 
                 <View
                     android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                             android:layout_margin="10dp"
                             android:textAppearance="?attr/textAppearanceCaption"
                             android:textColor="@color/colorTextDark"
-                            tools:text="3.5" />
+                            tools:text="3.5 / 5" />
                     </LinearLayout>
 
                     <TextView
@@ -108,11 +108,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/layout_city_header"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toTopOf="@id/layout_city_features"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                >
+                app:layout_constraintTop_toBottomOf="@id/layout_city_header">
 
                 <com.github.florent37.expansionpanel.ExpansionHeader
                     android:layout_width="match_parent"
@@ -150,7 +150,7 @@
                             android:layout_marginBottom="16dp"
                             android:text="@string/titleCountryTipsSubtitle"
                             android:textAppearance="?attr/textAppearanceOverline"
-                            android:textColor="@color/colorTitleRanking"
+                            android:textColor="@color/colorTextDark"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/expansion_indicator_tips_city"
                             app:layout_constraintStart_toStartOf="parent"
@@ -203,14 +203,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/cityServiceTitleMarginHorizontal"
                     android:layout_marginTop="@dimen/cityServiceTitleMarginHorizontal"
-                    android:textAppearance="?attr/textAppearanceHeadline2"
-                    android:text="@string/titleCityService" />
+                    android:text="@string/titleCityService"
+                    android:textAppearance="?attr/textAppearanceHeadline2" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/view_services_city"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
