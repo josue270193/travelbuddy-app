@@ -1,0 +1,24 @@
+Credits
+This application uses Open Source components. 
+You can find the source code of their open source projects along with license information below. 
+We acknowledge and are grateful to these developers for their contributions to open source.
+
+Project: retrofit https://github.com/square/retrofit
+Apache License 2.0 https://github.com/square/retrofit/blob/master/LICENSE.txt
+
+Project: glide https://github.com/bumptech/glide
+Copyright 2014 Google, Inc. All rights reserved.
+https://github.com/bumptech/glide/blob/master/LICENSE
+
+Project: shimmer-android https://github.com/facebook/shimmer-android
+Copyright (c) Facebook, Inc. and its affiliates. All rights reserved.
+BSD License https://github.com/facebook/shimmer-android/blob/master/LICENSE
+
+Project: ExpansionPanel https://github.com/florent37/ExpansionPanel
+Apache License 2.0 https://github.com/florent37/ExpansionPanel/blob/master/LICENSE
+
+Project: material-components-android https://github.com/material-components/material-components-android
+Apache License 2.0 https://github.com/material-components/material-components-android/blob/master/LICENSE
+
+Project: timber https://github.com/JakeWharton/timber
+Apache License 2.0 https://github.com/JakeWharton/timber/blob/master/LICENSE.txt
