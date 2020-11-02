@@ -24,6 +24,7 @@
         android:id="@+id/main_city"
         android:name="com.app.travelbuddy.ui.fragment.main.CityFragment"
         tools:layout="@layout/fragment_main_city">
+
         <argument
             android:name="cityData"
             app:argType="com.app.travelbuddy.ui.model.CityModel" />
@@ -31,11 +32,6 @@
             android:id="@+id/navigate_to_main_city_service"
             app:destination="@id/main_city_service" />
     </fragment>
-
-    <fragment
-        android:id="@+id/main_discovery"
-        android:name="com.app.travelbuddy.ui.fragment.main.DiscoveryFragment"
-        tools:layout="@layout/fragment_main_discovery" />
 
     <fragment
         android:id="@+id/main_user"
@@ -50,4 +46,28 @@
             android:name="serviceData"
             app:argType="com.app.travelbuddy.ui.model.ServiceCityModel" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/main_welcome"
+        android:name="com.app.travelbuddy.ui.fragment.main.WelcomeFragment"
+        tools:layout="@layout/fragment_main_welcome" >
+        <action
+            android:id="@+id/action_main_welcome_to_main_new_user"
+            app:destination="@id/main_new_user" />
+        <action
+            android:id="@+id/action_main_welcome_to_main_login"
+            app:destination="@id/main_login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/main_login"
+        android:name="com.app.travelbuddy.ui.fragment.main.LoginFragment"
+        tools:layout="@layout/fragment_main_login" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/main_new_user"
+        android:name="com.app.travelbuddy.ui.fragment.main.NewUserFragment"
+        tools:layout="@layout/fragment_main_new_user" />
 </navigation>

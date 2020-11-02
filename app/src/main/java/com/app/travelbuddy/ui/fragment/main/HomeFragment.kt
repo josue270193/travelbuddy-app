@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.travelbuddy.R
 import com.app.travelbuddy.data.local.SharedPreferenceStringLiveData
 import com.app.travelbuddy.data.local.entity.CountryFull
-import com.app.travelbuddy.data.local.entity.WikiFull
 import com.app.travelbuddy.databinding.FragmentMainHomeBinding
 import com.app.travelbuddy.ui.adapter.RemainCityCountryAdapter
 import com.app.travelbuddy.ui.adapter.TipsCardAdapter
@@ -34,6 +33,7 @@ import com.app.travelbuddy.utils.ConstantUtil
 import com.app.travelbuddy.utils.Resource
 import com.app.travelbuddy.utils.StringUtil
 import com.app.travelbuddy.utils.StringUtil.capitalizeWords
+import com.app.travelbuddy.utils.WikiUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.google.android.material.card.MaterialCardView
@@ -282,7 +282,7 @@ class HomeFragment : Fragment(), CardCityListener, CardTipsListener {
                         country.name,
                         firstCity.city.ranking,
                         firstCity.city.imageUrl,
-                        buildTipsCity(firstCity.wiki)
+                        WikiUtil.buildTipsCity(firstCity.wiki, requireContext())
                     ),
                     binding.cardHomeFirst
                 )
@@ -314,7 +314,7 @@ class HomeFragment : Fragment(), CardCityListener, CardTipsListener {
                         country.name,
                         secondCity.city.ranking,
                         secondCity.city.imageUrl,
-                        buildTipsCity(secondCity.wiki)
+                        WikiUtil.buildTipsCity(secondCity.wiki, requireContext())
                     ),
                     binding.cardHomeSecond
                 )
@@ -346,7 +346,7 @@ class HomeFragment : Fragment(), CardCityListener, CardTipsListener {
                         country.name,
                         thirdCity.city.ranking,
                         thirdCity.city.imageUrl,
-                        buildTipsCity(thirdCity.wiki)
+                        WikiUtil.buildTipsCity(thirdCity.wiki, requireContext())
                     ),
                     binding.cardHomeThird
                 )
@@ -372,7 +372,7 @@ class HomeFragment : Fragment(), CardCityListener, CardTipsListener {
                         country.name,
                         item.city.ranking,
                         item.city.imageUrl,
-                        buildTipsCity(item.wiki)
+                        WikiUtil.buildTipsCity(item.wiki, requireContext())
                     )
                 }
                 remainCityCountryAdapter.update(remainCities)
@@ -431,64 +431,5 @@ class HomeFragment : Fragment(), CardCityListener, CardTipsListener {
         }
     }
 
-    private fun buildTipsCity(wiki: WikiFull?): List<TipModel> {
-        return wiki?.let { wikiData ->
-            val tips = mutableListOf<TipModel>()
-            wikiData.wikiCurrency?.let {
-                tips += TipModel(
-                    TypeTipModel.CURRENCY,
-                    it.description!!,
-                    it.value!!
-                )
-            }
-            wikiData.wikiPopulation?.let {
-                tips += TipModel(
-                    TypeTipModel.POPULATION,
-                    it.description!!,
-                    it.value!!
-                )
-            }
-            wikiData.wikiDemonym?.let {
-                tips += TipModel(
-                    TypeTipModel.DEMONYM,
-                    it.description!!,
-                    it.value!!
-                )
-            }
-            wikiData.wiki.emoji?.let {
-                tips += TipModel(
-                    TypeTipModel.EMOJI,
-                    getString(R.string.countryTipEmoji),
-                    it
-                )
-            }
-            wikiData.wikiWebPage?.let { it ->
-                tips += TipModel(
-                    TypeTipModel.WEBPAGE,
-                    it.wikiWebPage.description!!,
-                    it.wikiWebPageDetails?.map { item -> item.value }?.joinToString()!!
-                )
-            }
-            wikiData.wikiLanguage?.let {
-                tips += TipModel(
-                    TypeTipModel.LANGUAGE,
-                    it.description!!,
-                    it.value!!
-                )
-            }
-            wikiData.wikiGeolocation?.let {
-                tips += TipModel(
-                    TypeTipModel.GEOLOCATION,
-                    it.description!!,
-                    getString(
-                        R.string.valueGeolocationMaps,
-                        it.latitude.toString(),
-                        it.longitude.toString(),
-                        it.precision.toString()
-                    )
-                )
-            }
-            tips
-        }.orEmpty()
-    }
+
 }

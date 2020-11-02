@@ -5,10 +5,15 @@ import android.content.SharedPreferences
 import com.app.travelbuddy.BuildConfig
 import com.app.travelbuddy.data.local.AppDatabase
 import com.app.travelbuddy.data.local.dao.CountryDao
+import com.app.travelbuddy.data.local.dao.UserDao
 import com.app.travelbuddy.data.remote.CountryRemoteDataSource
+import com.app.travelbuddy.data.remote.UserRemoteDataSource
+import com.app.travelbuddy.data.remote.interceptor.AuthenticationInterceptor
 import com.app.travelbuddy.data.remote.service.CityService
 import com.app.travelbuddy.data.remote.service.IpApiService
+import com.app.travelbuddy.data.remote.service.UserService
 import com.app.travelbuddy.data.repository.CountryRepository
+import com.app.travelbuddy.data.repository.UserRepository
 import com.app.travelbuddy.utils.ConstantUtil
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -47,17 +52,26 @@ object AppModule {
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BASIC
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }
 
     @Provides
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+    fun provideAuthenticationInterceptor(userDao: UserDao): AuthenticationInterceptor {
+        return AuthenticationInterceptor(userDao)
+    }
+
+    @Provides
+    fun provideOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        authenticationInterceptor: AuthenticationInterceptor
+    ): OkHttpClient =
         OkHttpClient.Builder()
             .callTimeout(5, TimeUnit.SECONDS)
             .writeTimeout(5, TimeUnit.SECONDS)
             .readTimeout(5, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(authenticationInterceptor)
             .build()
 
     @Provides
@@ -78,10 +92,19 @@ object AppModule {
     fun provideIpApiService(retrofit: Retrofit): IpApiService =
         retrofit.create(IpApiService::class.java)
 
+    @Provides
+    fun provideUserService(retrofit: Retrofit): UserService =
+        retrofit.create(UserService::class.java)
+
     @Singleton
     @Provides
     fun provideCountryRemoteDataSource(cityService: CityService, ipApiService: IpApiService) =
         CountryRemoteDataSource(cityService, ipApiService)
+
+    @Singleton
+    @Provides
+    fun provideUserRemoteDataSource(userService: UserService) =
+        UserRemoteDataSource(userService)
 
     @Singleton
     @Provides
@@ -90,7 +113,11 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideCharacterDao(db: AppDatabase) = db.countryDao()
+    fun provideUserDao(db: AppDatabase) = db.userDao()
+
+    @Singleton
+    @Provides
+    fun provideCountryDao(db: AppDatabase) = db.countryDao()
 
     @Singleton
     @Provides
@@ -99,4 +126,12 @@ object AppModule {
         localDataSource: CountryDao,
         sharedPreference: SharedPreferences
     ) = CountryRepository(remoteDataSource, localDataSource, sharedPreference)
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(
+        remoteDataSource: UserRemoteDataSource,
+        localDataSource: UserDao,
+        sharedPreference: SharedPreferences
+    ) = UserRepository(remoteDataSource, localDataSource, sharedPreference)
 }

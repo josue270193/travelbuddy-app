@@ -58,4 +58,26 @@
     <string name="descriptionTipsIcon">Icono Tips</string>
     <string name="titleServiceTips">Selección</string>
     <string name="titleServiceTipsSubtitle">Recomendado por la comunidad</string>
+    <string name="contentDescriptionIconWelcome">Icono logo</string>
+    <string name="textTitleWelcome">Tu nuevo  compañero de viajes</string>
+    <string name="textSubtitleWelcome">Miles de viajeros consultan TravelBuddy antes de emprender un nuevo viaje.</string>
+    <string name="textGoNewUserWelcome">Registrate</string>
+    <string name="textGoLoginWelcome">Iniciar sesión</string>
+    <string name="textQuestionWelcome">¿Ya tienes una cuenta?</string>
+    <string name="textTitleLogin">¡Volviste!</string>
+    <string name="textSubtitleLogin">Que alegria tenerte de vuelta \n ¿Nos ponemos al día?</string>
+    <string name="hintUserLogin">Usuario</string>
+    <string name="textDoLogin">Ingresar</string>
+    <string name="textQuestionLogin">¿No tienes una cuenta?</string>
+    <string name="textGoNewUserLogin">Registrate</string>
+    <string name="textTitleNewUser">Crea tu cuenta</string>
+    <string name="hintEmailNewUser">Email</string>
+    <string name="hintNombreNewUser">Nombre</string>
+    <string name="hintPasswordLogin">Contraseña</string>
+    <string name="hintPasswordNewUser">Contraseña</string>
+    <string name="textDoRegisterNewUser">Empecemos</string>
+    <string name="textNeedLogin">Requiere iniciar una sesion</string>
+    <string name="contentDescriptionImageUser">Icono del Usuario</string>
+    <string name="textCategoryRanking">Top Ciudades</string>
+    <string name="textFavoriteUser">Favoritos</string>
 </resources>

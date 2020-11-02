@@ -47,7 +47,7 @@
                         android:layout_width="@dimen/toolbarIconSize"
                         android:layout_height="@dimen/toolbarIconSize"
                         android:layout_gravity="center"
-                        android:background="@drawable/round_button"
+                        android:background="@drawable/shape_round_transparent_button"
                         android:contentDescription="@string/descriptionIconLocationCountry"
                         app:srcCompat="@drawable/ic_icon_location" />
 
@@ -119,7 +119,7 @@
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:textAppearance="?attr/textAppearanceOverline"
-                                        android:textColor="@color/colorTitleRanking"
+                                        android:textColor="@color/colorTextSubtitle"
                                         tools:text="4.88 / 5" />
 
                                 </LinearLayout>
@@ -219,7 +219,7 @@
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:textAppearance="?attr/textAppearanceOverline"
-                                        android:textColor="@color/colorTitleRanking"
+                                        android:textColor="@color/colorTextSubtitle"
                                         tools:text="4.99 / 5" />
 
                                 </LinearLayout>
@@ -320,7 +320,7 @@
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:textAppearance="?attr/textAppearanceOverline"
-                                        android:textColor="@color/colorTitleRanking"
+                                        android:textColor="@color/colorTextSubtitle"
                                         tools:text="4.00 / 5" />
 
                                 </LinearLayout>
@@ -408,28 +408,12 @@
                                 style="@style/Widget.App.ChipCountrySearch"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:elevation="@dimen/chipDefaultElevation"
-                                android:text="Top Ciudades"
+                                android:checkable="true"
+                                android:checked="true"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:text="@string/textCategoryRanking"
                                 tools:text="Top Ciudades" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chip2"
-                                style="@style/Widget.App.ChipCountrySearch"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:elevation="@dimen/chipDefaultElevation"
-                                android:text="Top Parques Nacionales"
-                                tools:text="Top Parques Nacionales" />
-
-                            <com.google.android.material.chip.Chip
-                                android:id="@+id/chip3"
-                                style="@style/Widget.App.ChipCountrySearch"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:elevation="@dimen/chipDefaultElevation"
-                                android:text="Top Actividades"
-                                tools:text="Top Actividades" />
-
 
                         </com.google.android.material.chip.ChipGroup>
                     </HorizontalScrollView>

@@ -1,26 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_header_user"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TEXTO 2" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TEXTO 3" />
+            <ImageView
+                android:id="@+id/image_header_user"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:contentDescription="@string/contentDescriptionCityImage"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/im_header_user" />
 
-        <Button
-            android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linear_layout_header_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/image_user"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/contentDescriptionImageUser"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+                            app:srcCompat="@drawable/ic_default_user" />
+
+                        <TextView
+                            android:id="@+id/name_user"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:textAppearance="?attr/textAppearanceHeadline1"
+                            tools:text="Nombre Usuario" />
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TEXTO 4" />
-    </LinearLayout>
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraint_layout_header_user">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textFavoriteUser"
+                android:textAppearance="?attr/textAppearanceHeadline2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/view_favorite_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:transitionGroup="true" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

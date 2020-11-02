@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:textColor="@color/colorTextDark"
                 android:text="@string/appName"
                 android:textSize="@dimen/splashTextFontSize" />
 

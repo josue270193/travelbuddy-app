@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.app.travelbuddy.data.local.dao.CountryDao
+import com.app.travelbuddy.data.local.dao.UserDao
 import com.app.travelbuddy.data.local.entity.*
 import com.app.travelbuddy.data.local.entity.converter.Converters
 
@@ -23,12 +24,16 @@ import com.app.travelbuddy.data.local.entity.converter.Converters
         WikiPopulation::class,
         WikiWebPage::class,
         WikiWebPageDetail::class,
+        User::class,
+        UserFavorite::class
     ], version = 1, exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun countryDao(): CountryDao
+
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile

@@ -73,7 +73,7 @@
 
     <style name="TextAppearance.App.Splash" parent="@android:style/TextAppearance">
         <item name="android:fontFamily">@font/font_neon_regular</item>
-        <item name="android:textColor">@color/colorTextSplash</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="Widget.App.ButtonRankingSecond" parent="Widget.MaterialComponents.Button">

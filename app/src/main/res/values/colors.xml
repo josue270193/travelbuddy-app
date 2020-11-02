@@ -5,7 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorText">#262626</color>
     <color name="colorTextDark">#FFFFFF</color>
-    <color name="colorTextSplash">#FFFFFF</color>
+    <color name="colorTextSubtitle">#919191</color>
 
     <color name="colorBottomActive">#A7D676</color>
     <color name="colorBottomInactive">#919191</color>
@@ -34,7 +34,7 @@
     <color name="cityGradientCenter">#99000000</color>
     <color name="cityGradientEnd">#000000</color>
     <color name="cityGradientStart">#00000000</color>
-    <color name="colorTitleRanking">#919191</color>
+
 
     <color name="colorSkeleton">#DDDDDD</color>
 

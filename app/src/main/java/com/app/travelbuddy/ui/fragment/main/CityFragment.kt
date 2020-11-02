@@ -8,14 +8,13 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +33,7 @@ import com.app.travelbuddy.ui.model.ServiceCityReviewModel
 import com.app.travelbuddy.ui.model.TipModel
 import com.app.travelbuddy.ui.model.enumeration.TypeTipModel
 import com.app.travelbuddy.ui.viewmodel.CityViewModel
+import com.app.travelbuddy.ui.viewmodel.UserViewModel
 import com.app.travelbuddy.utils.ConstantUtil
 import com.app.travelbuddy.utils.Resource
 import com.app.travelbuddy.utils.StringUtil.capitalizeWords
@@ -51,13 +51,16 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener, Ca
     private var attractionCityAdapter = AttractionCityAdapter(listOf(), this)
     private var serviceCityAdapter = ServiceCityAdapter(listOf(), this)
     private var tipCityAdapter = TipsCardAdapter(listOf(), this, 3)
+    private var isFavorite: Boolean = false
 
     private lateinit var binding: FragmentMainCityBinding
 
     private val cityData by lazy {
         CityFragmentArgs.fromBundle(requireArguments()).cityData
     }
+
     private val cityViewModel: CityViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +70,7 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener, Ca
             duration = resources.getInteger(R.integer.cityCardTransitionDuration).toLong()
             scrimColor = Color.TRANSPARENT
         }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -83,6 +87,66 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener, Ca
         setupObservers()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.city_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.toolbar_option_favorite -> {
+                onClickFavorite()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    private fun onClickFavorite() {
+        val navController = findNavController()
+        userViewModel.getUserLogin().observe(viewLifecycleOwner, { response ->
+            when (response.status) {
+                Resource.Status.LOADING -> {
+                    Timber.d("status: ${response.status}")
+                }
+                Resource.Status.ERROR -> {
+                    Timber.d("status: ${response.status}")
+                    Timber.d("message: ${response.message}")
+                    Snackbar.make(
+                        binding.scrollCity, R.string.textNeedLogin,
+                        Snackbar.LENGTH_LONG
+                    ).setAction(R.string.textGoLoginWelcome) {
+                        navController.navigate(R.id.main_welcome)
+                    }.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    Timber.d("status: ${response.status}")
+                    Timber.d("data: ${response.data}")
+
+                    Snackbar.make(
+                        binding.scrollCity,
+                        "Se marca como favorito: ${cityData.id}",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    isFavorite = !isFavorite
+                    activity?.invalidateOptionsMenu()
+                }
+            }
+        })
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val itemFavorite = menu.findItem(R.id.toolbar_option_favorite)
+        if (isFavorite) {
+            itemFavorite.setIcon(R.drawable.ic_icon_favorite)
+        } else {
+            itemFavorite.setIcon(R.drawable.ic_icon_favorite_outline)
+        }
+        super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onClickCardAttraction(
         attractionModel: AttractionCityModel,
         cardView: MaterialCardView
@@ -90,7 +154,7 @@ class CityFragment : Fragment(), CardAttractionListener, CardServiceListener, Ca
         return View.OnClickListener {
             Snackbar.make(
                 binding.scrollCity,
-                "Ir a Atraccion",
+                "Funcionalidad no Implementada",
                 Snackbar.LENGTH_LONG
             ).show()
         }
