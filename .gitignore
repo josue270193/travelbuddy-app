@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 /.idea/shelf/
+/app/release/app-release.aab

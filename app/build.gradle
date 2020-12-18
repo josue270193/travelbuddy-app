@@ -6,11 +6,19 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
+    signingConfigs {
+        config {
+        storeFile file('/home/josue/Public/travelbuddy-key.jks')
+            storePassword 'josue23503360'
+            keyAlias 'upload'
+            keyPassword 'josue23503360'
+        }
+    }
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.app.travelbuddy"
+        applicationId "com.app.josuelopez.travelbuddy"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
@@ -29,6 +37,7 @@ android {
             shrinkResources true
             buildConfigField "String", "API_URL", API_URL
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     buildFeatures {
