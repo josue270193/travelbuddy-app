@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/main_home"
-        android:name="com.app.travelbuddy.ui.fragment.main.HomeFragment"
+        android:name="com.app.josuelopez.travelbuddy.ui.fragment.main.HomeFragment"
         tools:layout="@layout/fragment_main_home">
         <action
             android:id="@+id/navigate_to_main_city"
@@ -22,12 +22,12 @@
 
     <fragment
         android:id="@+id/main_city"
-        android:name="com.app.travelbuddy.ui.fragment.main.CityFragment"
+        android:name="com.app.josuelopez.travelbuddy.ui.fragment.main.CityFragment"
         tools:layout="@layout/fragment_main_city">
 
         <argument
             android:name="cityData"
-            app:argType="com.app.travelbuddy.ui.model.CityModel" />
+            app:argType="com.app.josuelopez.travelbuddy.ui.model.CityModel" />
         <action
             android:id="@+id/navigate_to_main_city_service"
             app:destination="@id/main_city_service" />
@@ -35,22 +35,22 @@
 
     <fragment
         android:id="@+id/main_user"
-        android:name="com.app.travelbuddy.ui.fragment.main.UserFragment"
+        android:name="com.app.josuelopez.travelbuddy.ui.fragment.main.UserFragment"
         tools:layout="@layout/fragment_main_user" />
 
     <fragment
         android:id="@+id/main_city_service"
-        android:name="com.app.travelbuddy.ui.fragment.main.CityServiceFragment"
+        android:name="com.app.josuelopez.travelbuddy.ui.fragment.main.CityServiceFragment"
         tools:layout="@layout/fragment_main_city_service">
         <argument
             android:name="serviceData"
-            app:argType="com.app.travelbuddy.ui.model.ServiceCityModel" />
+            app:argType="com.app.josuelopez.travelbuddy.ui.model.ServiceCityModel" />
     </fragment>
 
 
     <fragment
         android:id="@+id/main_welcome"
-        android:name="com.app.travelbuddy.ui.fragment.main.WelcomeFragment"
+        android:name="com.app.josuelopez.travelbuddy.ui.fragment.main.WelcomeFragment"
         tools:layout="@layout/fragment_main_welcome" >
         <action
             android:id="@+id/action_main_welcome_to_main_new_user"
@@ -62,12 +62,12 @@
 
     <fragment
         android:id="@+id/main_login"
-        android:name="com.app.travelbuddy.ui.fragment.main.LoginFragment"
+        android:name="com.app.josuelopez.travelbuddy.ui.fragment.main.LoginFragment"
         tools:layout="@layout/fragment_main_login" >
     </fragment>
 
     <fragment
         android:id="@+id/main_new_user"
-        android:name="com.app.travelbuddy.ui.fragment.main.NewUserFragment"
+        android:name="com.app.josuelopez.travelbuddy.ui.fragment.main.NewUserFragment"
         tools:layout="@layout/fragment_main_new_user" />
 </navigation>
